@@ -1,4 +1,6 @@
-#include "otp.h"
+#include <iostream>
+#include <fstream>
+#include "lib\libotp.h"
 
 void main(int argc, char* argv[]) {
 	if (argc < 2) {

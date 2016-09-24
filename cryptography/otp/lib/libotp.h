@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LIBOTP_H
+#define LIBOTP_H
+
 #include <vector>
 #include <random>
 #include <algorithm>
@@ -18,7 +20,7 @@ public:
 	virtual ~Generator() {};
 };
 
-class RawPointerOtp : Generator {
+class RawPointerOtp : public Generator {
 	ubyte* mess;
 public:
 	RawPointerOtp(const std::string& message);
@@ -27,9 +29,9 @@ public:
 	~RawPointerOtp();
 };
 
-class VectorOtp : Generator {
+class VectorOtp : public Generator {
 protected:
-	using Generator::key;
+	//using Generator::key;
 	std::vector<ubyte> mess=std::vector<ubyte>(MESS_SIZE);
 public:
 	VectorOtp(const std::string& message);
@@ -38,9 +40,10 @@ public:
 	virtual ~VectorOtp() {};
 };
 
-class IteratorOtp : VectorOtp {
+class IteratorOtp : public VectorOtp {
 public:
 	IteratorOtp(const std::string& message);
 	void encdec() override;
 	const decltype(mess)& message() const;
 };
+#endif // !LIBOTP_H
