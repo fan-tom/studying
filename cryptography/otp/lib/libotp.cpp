@@ -5,12 +5,12 @@
 		std::uniform_int_distribution<int> distr(1,255);
 		auto gen = std::bind(distr,engine);
 		//auto rand = [generator, distr]() {return distr(generator); };
-		std::generate(key.begin(), key.end(), [&gen]() {return static_cast<ubyte>(gen()); });
+		std::generate(key.begin(), key.end(), [&gen]() {return static_cast<char>(gen()); });
 		key[key.size() - 1] = '\0';
 	}
 
 	RawPointerOtp::RawPointerOtp(const std::string& message) {
-		this->mess = new ubyte[MESS_SIZE];
+		this->mess = new char[MESS_SIZE];
 		std::copy(message.cbegin(), message.cend(), this->mess);
 	}
 
